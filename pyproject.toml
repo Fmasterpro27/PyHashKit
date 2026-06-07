@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PyHashKit"
+version = "0.1.0"
+description = "A lightweight Python library for hashing text and files using multiple cryptographic algorithms."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.8"
+authors = [{ name = "fmasterpro27" }]
+keywords = [
+    "hash",
+    "hashing",
+    "sha256",
+    "sha512",
+    "checksum",
+    "verification",
+    "integrity",
+    "security",
+    "file-hash",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Security",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+
+[project.urls]
+Homepage = "https://github.com/Fmasterpro27/PyHashKit"
+Repository = "https://github.com/Fmasterpro27/PyHashKit"
+Issues = "https://github.com/Fmasterpro27/PyHashKit/issues"
+
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
