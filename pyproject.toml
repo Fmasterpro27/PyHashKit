@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "PyHashKit"
-version = "0.1.0"
+version = "0.2.0"
 description = "A lightweight Python library for hashing text and files using multiple cryptographic algorithms."
 readme = "README.md"
 license = "Apache-2.0"
@@ -37,6 +37,8 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 
+[project.scripts]
+pyhashkit = "pyhashkit.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/Fmasterpro27/PyHashKit"

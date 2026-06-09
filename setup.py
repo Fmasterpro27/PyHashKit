@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="PyHashKit",
-    version="0.1.0",
+    version="0.2.0",
     author="fmasterpro27",
     description="A modern Python toolkit for file hashing, checksum generation, verification, and integrity checking.",
     long_description=long_description,
@@ -23,8 +23,9 @@ setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
+    pyhashkit = "pyhashkit.cli:main",
     python_requires=">=3.8",
-    install_requires=[],  # hashing.py only uses standard library 'hashlib'
+    install_requires=[],
     extras_require={
         "test": ["pytest"],
     },
