@@ -1,10 +1,15 @@
 import hashlib
 
+
 def algorithms():
     return sorted(hashlib.algorithms_available)
 
 
-def hash_text(text: str, algorithm: str = "sha256") -> str:
+def hash_text(
+    text: str,
+    algorithm: str = "sha256",
+    digest_size: int = 32
+) -> str:
     if not isinstance(text, str):
         raise TypeError(
             "text must be a string"
@@ -18,10 +23,21 @@ def hash_text(text: str, algorithm: str = "sha256") -> str:
         )
 
     hash_obj.update(text.encode("utf-8"))
+
+    if algorithm.lower() in {
+        "shake_128",
+        "shake_256"
+    }:
+        return hash_obj.hexdigest(digest_size)
+
     return hash_obj.hexdigest()
 
 
-def hash_file(file_path: str, algorithm: str = "sha256") -> str:
+def hash_file(
+    file_path: str,
+    algorithm: str = "sha256",
+    digest_size: int = 32
+) -> str:
     if not isinstance(file_path, str):
         raise TypeError(
             "file_path must be a string"
@@ -56,5 +72,11 @@ def hash_file(file_path: str, algorithm: str = "sha256") -> str:
         raise OSError(
             f"Failed to read file: {e}"
         )
+
+    if algorithm.lower() in {
+        "shake_128",
+        "shake_256"
+    }:
+        return hash_obj.hexdigest(digest_size)
 
     return hash_obj.hexdigest()

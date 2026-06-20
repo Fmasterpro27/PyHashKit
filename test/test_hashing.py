@@ -42,27 +42,84 @@ class TestHashing(unittest.TestCase):
         self.assertIsInstance(algos, list)
         self.assertGreater(len(algos), 0)
 
-        self.assertIn("sha256", algos)  
+        self.assertIn("sha256", algos) 
+
+
+    def test_hash_text_shake128(self):
+        result = hash_text(
+            "hello world",
+            algorithm="shake_128",
+            digest_size=32
+        )
+
+        self.assertIsInstance(result, str)
+
+        # SHAKE hexdigest length = digest_size * 2
+        self.assertEqual(len(result), 64) 
+
+
+
+    def test_hash_text_shake256(self):
+        result = hash_text(
+            "hello world",
+            algorithm="shake_256",
+            digest_size=32
+        )
+
+        self.assertIsInstance(result, str)
+        self.assertEqual(len(result), 64)  
+
+    def test_hash_file_shake128(self):
+        with tempfile.NamedTemporaryFile(delete=False) as tmp:
+            tmp.write(b"file content")
+            tmp_path = tmp.name
+
+        try:
+            result = hash_file(
+                tmp_path,
+                algorithm="shake_128",
+                digest_size=32
+            )
+
+            self.assertIsInstance(result, str)
+            self.assertEqual(len(result), 64)
+
+        finally:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path) 
+
+    def test_hash_file_shake256(self):
+        with tempfile.NamedTemporaryFile(delete=False) as tmp:
+            tmp.write(b"file content")
+            tmp_path = tmp.name
+
+        try:
+            result = hash_file(
+                tmp_path,
+                algorithm="shake_256",
+                digest_size=32
+            )
+
+            self.assertIsInstance(result, str)
+            self.assertEqual(len(result), 64)
+
+        finally:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)     
 
     def test_hash_text_all_algorithms(self):
-        skip = {
-            "shake_128",
-            "shake_256"
-        }
 
         for algo in algorithms():
-            if algo in skip:
-                continue
-
             result = hash_text(
                 "hello world",
-                algo
+                algo,
+                32
             )
 
             self.assertIsInstance(
                 result,
                 str
-            )    
+            )       
 
 if __name__ == "__main__":
     unittest.main()
